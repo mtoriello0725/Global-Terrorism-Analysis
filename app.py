@@ -30,6 +30,7 @@ To query from sqlite,
     stmt = db.session.query(<sample>).statement
     df = pd.read_sql_query(stmt, db.session.bind)
 """
+
 ##################################################
 # Routes leading to templates:
 ##################################################
