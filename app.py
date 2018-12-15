@@ -1,35 +1,22 @@
 import os
+import json
+from config import *
 
 import pandas as pd
 import numpy as np
 
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
-
-# Import Flask
+# Import Flask & pymongo
 from flask import Flask, jsonify, render_template, redirect, request
-from flask_sqlalchemy import SQLAlchemy
+import pymongo
 
-
+# Start Flask application:
 app = Flask(__name__)
 
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database/global_terrorism.sqlite"
-
-# db = SQLAlchemy(app)
-
-# # reflect an existing database into a new model
-# Base = automap_base()
-# # reflect the tables
-# Base.prepare(db.engine, reflect=True)
-
-"""
-To query from sqlite, 
-    # Use Pandas to perform the sql query
-    stmt = db.session.query(<sample>).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
-"""
+# Configue connection to MongoDB.
+conn = f"mongodb://{dbuser}:{dbpassword}@ds135724.mlab.com:35724/global_terror"
+mongoClient = pymongo.MongoClient(conn)
+db = mongoClient.global_terror
+col = db["terror_collection"]
 
 ##################################################
 # Routes leading to templates:
@@ -38,31 +25,42 @@ To query from sqlite,
 @app.route("/")
 def index():
     """Return the homepage."""
+
     return render_template("index.html")
+
+@app.route("/graphs")
+def chartDisplay():
+	""" Return chartsDisplay page """
+	return render_template("graphs.html")
 
 @app.route("/about")
 def about():
 	""" Return about page """
 	return render_template("about.html")
 
-@app.route("/chartsDisplay")
-def chartDisplay():
-	""" Return chartsDisplay page """
-	return render_template("chartsDisplay.html")
-
-
-
 ##################################################
 # Routes leading to api calls:
 ##################################################
 @app.route("/api/geography")
 def geography():
-	""" Return queried data for geographical plot """
 
-	# stmt = db.session.query(<query_statement>).statement
-	# df_geo = pd.read_sql_query(stmt, db.session.bind)
+	# query statement for mongo dataset
+	query = {"year": 2017}
+	paramDict = {
+	    "_id": False,
+	    "city": True,
+	    "latitude": True,
+	    "longitude": True
+	    }
+	result = col.find(query, paramDict)
 
-	return jsonify(df_geo.to_json(orient="records"))
+	# Append an empty variable with all the queried locations.
+	geo2017 = []
+	for atk in result: 
+		geo2017.append(atk)
+
+	# Return jsonified object.
+	return jsonify(geo2017)
 
 
 if __name__ == "__main__":
