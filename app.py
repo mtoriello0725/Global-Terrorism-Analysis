@@ -41,11 +41,11 @@ def about():
 ##################################################
 # Routes leading to api calls:
 ##################################################
-@app.route("/api/geography")
-def geography():
+@app.route("/api/geography/<int:year>")
+def geography(year):
 
 	# query statement for mongo dataset
-	query = {"year": 2017, "month": 4}
+	query = {"year": year}
 	paramDict = {
 	    "_id": False,
 	    "latitude": True,
