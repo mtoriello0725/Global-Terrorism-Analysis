@@ -45,12 +45,12 @@ def about():
 def geography():
 
 	# query statement for mongo dataset
-	query = {"year": 2017}
+	query = {"properties":{"year":2017}}
 	paramDict = {
 	    "_id": False,
-	    "city": True,
-	    "latitude": True,
-	    "longitude": True
+	    "type": True,
+	    "geometry": True,
+	    "properties": True
 	    }
 	result = col.find(query, paramDict)
 
