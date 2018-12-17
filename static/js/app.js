@@ -1,13 +1,13 @@
 var myMap = L.map("geoMap", {
   center: [31, 65],
-  zoom: 0
+  zoom: 2
 });
 
 
 // Adding tile layer to the map
 L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  maxZoom: 6,
+  maxZoom: 8,
   id: "mapbox.streets",
   accessToken: API_KEY
 }).addTo(myMap);
@@ -15,26 +15,26 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 function globalTerrorismMap() {
 
 	URL = "/api/geography";
-	d3.json(URL).then(function(response) {
+	d3.json(URL, function(response) {
 
-		// define geoData as the response
-		console.log(response);
+		var markers = L.markerClusterGroup();
 
-		// // assign markers to cluster group
-		// var markers = L.markerClusterGroup();
+		var geoJsonLayer = L.geoJson(response, {
+			onEachFeature: function(feature, layer) {
+				layer.bindPopup(feature.properties.target_type);
+				layer.on("mouseover", function(e) {
+					this.openPopup();
+				});
+				layer.on("mouseout", function(e) {
+					this.closePopup();
+				});
+			}
+		});
 
-		// for (var i=0; i < 10; i++) {
+		markers.addLayer(geoJsonLayer);
 
-		// 	var lat = geoData[i].latitude;
-		// 	var long = geoData[i].longitude;
-
-		// 	if (lat&long) {
-		// 		markers.addLayer(L.marker([lat, long])).bindPopup(geoData[i].city)
-		// 	}
-		// }
-
-		// myMap.addLayer(markers);
-
+		myMap.addLayer(markers);
+		myMap.fitBounds(markers.getBounds());
 	});
 }
 
