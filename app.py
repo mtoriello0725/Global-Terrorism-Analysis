@@ -45,22 +45,36 @@ def about():
 def geography():
 
 	# query statement for mongo dataset
-	query = {"properties":{"year":2017}}
+	query = {"year": 2017, "month": 4}
 	paramDict = {
 	    "_id": False,
-	    "type": True,
-	    "geometry": True,
-	    "properties": True
+	    "latitude": True,
+	    "longitude": True,
+	    "target_type": True
 	    }
 	result = col.find(query, paramDict)
 
 	# Append an empty variable with all the queried locations.
 	geo2017 = []
-	for atk in result: 
+	for atk in result:
 		geo2017.append(atk)
 
+	geojsonData = {
+	    "type": "FeatureCollection",
+	    "features": [
+	        {
+	            "type": "Feature",
+	            "geometry": {
+	                "type": "Point",
+	                "coordinates": [d["longitude"], d["latitude"]],
+	                },
+	            "properties": d,
+	        } for d in geo2017
+	    ]
+	}
+
 	# Return jsonified object.
-	return jsonify(geo2017)
+	return jsonify(geojsonData)
 
 
 if __name__ == "__main__":
