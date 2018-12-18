@@ -28,6 +28,12 @@ def index():
 
     return render_template("index.html")
 
+@app.route("/geography/<year>")
+def geoMapping(year):
+	""" Return the same geomapping above, but with any year as the input """
+	return render_template("index.html")
+
+
 @app.route("/graphs")
 def chartDisplay():
 	""" Return chartsDisplay page """
@@ -50,7 +56,8 @@ def geography(year):
 	    "_id": False,
 	    "latitude": True,
 	    "longitude": True,
-	    "target_type": True
+	    "target_type": True,
+	    "attack_type": True
 	    }
 	result = col.find(query, paramDict)
 
