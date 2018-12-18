@@ -115,10 +115,19 @@ function getYearMap(year) {
 
 // View the current window to find what to query:
 var current = window.location.href
-if (current.slice(-4) === "000/") {
-	console.log("homePage");
-	getYearMap("2017")
-} else {
+
+// Build yearArray, consisting of all the years in the database
+yearArray = [];
+for (var i=0; i<48; i++) {
+	yearArray.push((i+1970).toString())
+}
+
+// Conditional to determine which page runs
+if (yearArray.includes(current.slice(-4))) {
 	console.log(current.slice(-4));
 	getYearMap(current.slice(-4));
+} else {
+	console.log("homePage");
+	console.log(current.slice(-4));
+	getYearMap("2017");
 }
