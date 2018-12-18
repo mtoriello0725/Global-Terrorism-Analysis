@@ -54,7 +54,7 @@ function getYearMap(year) {
 
 		var geoJsonLayer = L.geoJson(yearData, {
 			onEachFeature: function(feature, layer) {
-				layer.bindPopup(feature.properties.target_type);
+				layer.bindPopup("<strong>"+feature.properties.target_type+"</strong><br><b>"+feature.properties.attack_type+"</b>");
 				layer.on("mouseover", function(e) {
 					this.openPopup();
 				});
@@ -113,4 +113,12 @@ function getYearMap(year) {
 	}
 }
 
-getYearMap("2016");
+// View the current window to find what to query:
+var current = window.location.href
+if (current.slice(-4) === "000/") {
+	console.log("homePage");
+	getYearMap("2017")
+} else {
+	console.log(current.slice(-4));
+	getYearMap(current.slice(-4));
+}
