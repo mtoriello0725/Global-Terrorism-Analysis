@@ -22,7 +22,6 @@ col = db["terror_collection"]
 @app.route("/")
 def index():
     """Return the homepage."""
-
     return render_template("index.html")
 
 @app.route("/geography/<year>")
