@@ -2,9 +2,6 @@ import os
 import json
 from config import *
 
-import pandas as pd
-import numpy as np
-
 # Import Flask & pymongo
 from flask import Flask, jsonify, render_template, redirect, request
 import pymongo
