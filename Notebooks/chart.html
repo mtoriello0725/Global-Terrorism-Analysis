@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Terror Events by Region</title>
+  </head>
+  <body>
+      <div style="width: 400px;"></div>
+    <canvas id="BarChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('BarChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Middle East & North Africa','South Asia','South America','Sub-Saharan Africa','Western Europe',
+    'Southeast Asia','Central America & Caribbean','Eastern Europe','North America','East Asia','Central Asia','Australasia & Oceania'],
+        datasets: [
+            {
+                label: 'Events (1970-2017)',
+                data: [50472,44971,18978,17550,16636,12485,10344,5144,3456,802,563,282],
+                backgroundColor: '#D6E9C6' // green
+            }
+        ]
+    },
+    options: {
+        scales: {
+            xAxes: [{ stacked: true }],
+            yAxes: [{ stacked: true }]
+        }
+    }
+  });
+    </script>
+  </body>
+</html>

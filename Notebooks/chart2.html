@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Terror Events by Decade</title>
+  </head>
+  <body>
+      <div style="width: 400px;"></div>
+    <canvas id="PolarChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('PolarChart');
+var myChart = new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+        labels: ["1970-1979","1980-1989","1990-1999","2000-2009","2010-2017"],
+        datasets: [
+            {
+                label: "Events by Decade",
+                backgroundColor: ['#f1c40f','#e67e22','#16a085','#2980b9','#8e44ad'],
+                data: [9914,31160,28762,25040,86807],
+            }
+        ],
+    options: {
+        animation: {
+            animateScale: false
+        }
+    }
+        }
+    });
+
+    </script>
+  </body>
+</html>
