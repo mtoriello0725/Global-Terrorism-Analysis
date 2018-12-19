@@ -44,15 +44,19 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/graphs">Graphs</a>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Graphs<span class="caret"></span> </a>
+                        <ul class="dropdown-menu">
+                            <li class="center-item"><a href="/eventspercountry">Events Per Country</a></li>
+                            <hr>
+                            <li class="center-item"><a href="/eventsbydecade">Events By Decade</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">1970s<span class="caret"></span> </a>
+                    <li class="dropdown dropdown-decade"><a class="dropdown-toggle" data-toggle="dropdown" href="#">1970s<span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="center-item"><a href="/geography/1970">1970</a></li>
                             <li class="center-item"><a href="/geography/1971">1971</a></li>
@@ -132,7 +136,7 @@
         </div>
 
         <div id="geoMap"></div>
-        <br>
+        <hr>
 
         <footer>
             <div class="row">
@@ -145,10 +149,10 @@
                 </div>
                 <div class="col-md-6">
                     <p class="project-names">
-                        <a href="#" target="#">Eric Tuscanes</a> | 
-                        <a href="#" target="#">Regan Farrell</a> | 
-                        <a href="#" target="#">Haris Sumra</a> | 
-                        <a href="#" target="#">Michael Toriello</a>
+                        <a href="https://github.com/erictuscanes" target="https://github.com/erictuscanes">Eric Tuscanes</a> | 
+                        <a href="https://github.com/Doc1Ft" target="https://github.com/Doc1Ft">Regan Farrell</a> | 
+                        <a href="https://github.com/harisx91" target="https://github.com/harisx91">Haris Sumra</a> | 
+                        <a href="https://github.com/mtoriello0725" target="https://github.com/mtoriello0725">Michael Toriello</a>
                     </p>
                 </div>
             </div>

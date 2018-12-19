@@ -1,6 +1,6 @@
 import os
 import json
-from config import *
+# from config import *
 
 # Import Flask & pymongo
 from flask import Flask, jsonify, render_template, redirect, request
@@ -10,7 +10,8 @@ import pymongo
 app = Flask(__name__)
 
 # Configue connection to MongoDB.
-conn = f"mongodb://{dbuser}:{dbpassword}@ds135724.mlab.com:35724/global_terror"
+# conn = f"mongodb://{dbuser}:{dbpassword}@ds135724.mlab.com:35724/global_terror"
+conn = os.getenv("MLAB_URI")
 mongoClient = pymongo.MongoClient(conn)
 db = mongoClient.global_terror
 col = db["terror_collection"]
@@ -29,11 +30,15 @@ def geoMapping(year):
 	""" Return the same geomapping above, but with any year as the input """
 	return render_template("index.html")
 
+@app.route("/eventspercountry")
+def barchartDisplay():
+	""" Return barchart """
+	return render_template("eventspercountry.html")
 
-@app.route("/graphs")
-def chartDisplay():
-	""" Return chartsDisplay page """
-	return render_template("graphs.html")
+@app.route("/eventsbydecade")
+def polarChartDisplay():
+	""" Return polarchart """
+	return render_template("eventsbydecade.html")
 
 @app.route("/about")
 def about():
