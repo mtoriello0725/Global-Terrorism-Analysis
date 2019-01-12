@@ -14,11 +14,16 @@
 
   <br><hr>
 
-  <h1>Hello World</h1>
+  <h1 align="center">About the Data Project</h1>
 
   <hr><br>
 
-  <div id="geo-plot"></div>
+  <div class="row">
+    <span class="glyphicon glyphicon-send"></span>
+    <h4>For this project, we retreived a dataset with ~180,000 rows of global detailed terrorist attacks from 1970 to 2017.</h4>
+        <img id="about-image" src="{{ url_for('static', filename='image/dataset.png') }}">
+          </div>
+      </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
